@@ -4,33 +4,16 @@ import random
 import hand_gestures
 
 computers_hand = random.randint(0, 2)
+names_list = ["ROCK", "PAPER", "SCISSORS"]
+gestures_list = [hand_gestures.rock, hand_gestures.paper, hand_gestures.scissors]
 
 print("Welcome to Rock Paper Scissors")
 players_hand = int(input("What do you choose? Type 0 for Rock, 1 for Paper or 2 for Scissors\n"))
 
-if players_hand == 0:
-    print("You chose ROCK")
-    print(hand_gestures.rock)
-elif players_hand == 1:
-    print("You chose PAPER")
-    print(hand_gestures.paper)
-elif players_hand == 2:
-    print("You chose SCISSORS")
-    print(hand_gestures.scissors)
-else:
-    print("Error: invalid number")
-
-computers_hand = random.randint(0, 2)
-
-if computers_hand == 0:
-    print("Computer chose ROCK")
-    print(hand_gestures.rock)
-elif computers_hand == 1:
-    print("Computer chose PAPER")
-    print(hand_gestures.paper)
-elif computers_hand == 2:
-    print("Computer chose SCISSORS")
-    print(hand_gestures.scissors)
+print("You chose: " + names_list[players_hand])
+print(gestures_list[players_hand])
+print("Computer chose: " + names_list[computers_hand])
+print(gestures_list[computers_hand])
 
 if computers_hand == players_hand:
     print("Tie!")
