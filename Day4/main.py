@@ -18,7 +18,7 @@ elif players_hand == 2:
     print("You chose SCISSORS")
     print(hand_gestures.scissors)
 else:
-    print("You didn't choose properly")
+    print("Error: invalid number")
 
 computers_hand = random.randint(0, 2)
 
