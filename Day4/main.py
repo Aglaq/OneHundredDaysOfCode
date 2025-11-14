@@ -1,6 +1,7 @@
 # Day 4 - Randomisation and Python Lists
 # Day 4 - Project: Rock Paper Scissors - Game
 import random
+import hand_gestures
 
 print("Welcome to Rock Paper Scissors")
 players_hand = int(input("What do you choose? Type 0 for Rock, 1 for Paper or 2 for Scissors\n"))
