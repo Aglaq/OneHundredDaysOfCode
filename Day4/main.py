@@ -7,11 +7,11 @@ print("Welcome to Rock Paper Scissors")
 players_hand = int(input("What do you choose? Type 0 for Rock, 1 for Paper or 2 for Scissors\n"))
 
 if players_hand == 0:
-    print(rock)
+    print(hand_gestures.rock)
 elif players_hand == 1:
-    print(paper)
+    print(hand_gestures.paper)
 elif players_hand == 2:
-    print(scissors)
+    print(hand_gestures.scissors)
 
 # Day4 examples and exercises
 # number = random.randint(1, 10)
