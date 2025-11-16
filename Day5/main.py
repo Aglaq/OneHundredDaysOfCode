@@ -6,7 +6,6 @@ letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
 numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 password = []
-
 print("Welcome to the PyPassword Generator!")
 nr_letters = int(input("How many letters would you like in your password?\n"))
 nr_numbers = int(input(f"How many numbers would you like?\n"))
@@ -23,7 +22,11 @@ for letter in range(nr_symbols):
     password.append(symbols[random_symbol])
 
 password_str = "".join(password) 
-print(f"Your password: {password_str}")
+print(f"Your password is: {password_str}")
+
+mixed_password = random.sample(password, len(password))
+mixed_password_str = "".join(mixed_password)
+print(f"Your password is: {mixed_password_str}")
 
 # Day 5 exercises and examples
 # print("Hello, Day 5!")
