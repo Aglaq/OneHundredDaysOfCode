@@ -11,8 +11,8 @@ for n in range(len(chosen_word)):
     placeholder += "_"
 print(placeholder)
 
-display = ""
-while "_" in display or display == "":
+game_over = False
+while not game_over:
     display = ""
     guess = input("Guess a letter: ").lower()
     # print(guess)
@@ -29,3 +29,6 @@ while "_" in display or display == "":
     print(display)
     placeholder = display
     # print(placeholder)
+    if "_" not in placeholder:
+        game_over = True
+        print("You won!")
