@@ -11,14 +11,21 @@ for n in range(len(chosen_word)):
     placeholder += "_"
 print(placeholder)
 
-guess = input("Guess a letter: ").lower()
-print(guess)
 display = ""
-for letter in chosen_word:
-    if letter == guess:
-        # print("Right")
-        display += letter
-    else:
-        # print("Wrong")
-        display += "_"
-print(display)
+while "_" in display or display == "":
+    display = ""
+    guess = input("Guess a letter: ").lower()
+    # print(guess)
+    for n, letter in enumerate(chosen_word):
+        if letter == guess:
+            # print("Right")
+            display += letter
+        elif letter == placeholder[n]:
+            display += placeholder[n]
+            # print(display)
+        else:
+            # print("Wrong")
+            display += "_"
+    print(display)
+    placeholder = display
+    # print(placeholder)
