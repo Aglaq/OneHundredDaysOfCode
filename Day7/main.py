@@ -1,15 +1,22 @@
 # Day 7 - Hangman
 # Day 7 - Project: Hangman
 
+# importing modules
 import random
 import art_hangman
+import words_lists
 
+# variables
 game_over = False
 lives = 6
 word_list = ["aardvark", "baboon", "camel"]
-chosen_word = random.choice(word_list)
-print(chosen_word)
 placeholder = ""
+
+# LOGO
+print(art_hangman.logo)
+
+# randomisation
+chosen_word = random.choice(words_lists.words)
 for n in range(len(chosen_word)):
     placeholder += "_"
 print(placeholder)
