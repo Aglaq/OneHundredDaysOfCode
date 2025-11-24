@@ -36,10 +36,7 @@ while not game_over:
         else:
             display += "_"
 
-    # print(display)
-
     # checking if life was lost
-
     if guess not in chosen_word and guess not in incorrect_letters:
         lives -= 1
         incorrect_letters.append(guess)
@@ -58,6 +55,7 @@ while not game_over:
     if lives == 0:
         game_over = True
         print("******************** YOU LOSE *******************")
+        print(f"The word was: '{chosen_word}'")
 
     if "_" not in placeholder:
         game_over = True
