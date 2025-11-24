@@ -9,43 +9,56 @@ import words_lists
 # variables
 game_over = False
 lives = 6
-word_list = ["aardvark", "baboon", "camel"]
 placeholder = ""
+incorrect_letters = []
 
 # LOGO
 print(art_hangman.logo)
 
-# randomisation
+# randomisation and placeholder made of "_"
 chosen_word = random.choice(words_lists.words)
 for n in range(len(chosen_word)):
     placeholder += "_"
 print(placeholder)
 
+# main while loop - core game
 while not game_over:
+
     display = ""
     guess = input("Guess a letter: ").lower()
-    # print(guess)
     
+    # if letter was correct
     for n, letter in enumerate(chosen_word):
         if letter == guess:
-            # print("Right")
             display += letter
         elif letter == placeholder[n]:
             display += placeholder[n]
-            # print(display)
         else:
-            # print("Wrong")
             display += "_"
-    print(display)
-    if placeholder == display:
+
+    # print(display)
+
+    # checking if life was lost
+
+    if guess not in chosen_word and guess not in incorrect_letters:
         lives -= 1
-        print(lives)
-    placeholder = display
+        incorrect_letters.append(guess)
+        print(f"There is no letter '{guess}'. You lose a life!")
+    elif guess not in chosen_word and guess in incorrect_letters:
+        print(f"You've already guessed letter '{guess}'")
+    else:
+        print(f"There is a letter '{guess}'")
+
+    print(display)
+    print(f"****************************** {lives}/6 LIVES LEFT ******************************")
     print(art_hangman.hangman_stages[lives])
+
+    placeholder = display
+
     if lives == 0:
         game_over = True
-        print("You lost!")
-    # print(placeholder)
+        print("******************** YOU LOSE *******************")
+
     if "_" not in placeholder:
         game_over = True
-        print("You won!")
+        print("******************** YOU WIN *******************")
