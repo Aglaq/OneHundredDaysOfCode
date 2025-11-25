@@ -1,7 +1,7 @@
 # Day 8 - Functions with Inputs
 # Day 8 - Project: Caesar Cipher
+import string
 import logo
-
 
 alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 repetition = True
@@ -20,16 +20,19 @@ while repetition:
             shift_amount = shift_amount
         elif encode_or_decode == "decode":
             shift_amount = - shift_amount
-
-        for letter in original_text:
-            index = alphabet.index(letter)
-            new_index = index + shift_amount
-            # this idea only works to shift < 26
-            # if new_index > 25:
-            #     new_index = new_index - 26
-            # below let shift be infinite
-            new_index %= len(alphabet)
-            final_text += alphabet[new_index]
+        
+        for sign in original_text:
+            if sign in alphabet:
+                index = alphabet.index(sign)
+                new_index = index + shift_amount
+                # this idea only works to shift < 26
+                # if new_index > 25:
+                #     new_index = new_index - 26
+                # below let shift be infinite
+                new_index %= len(alphabet)
+                final_text += alphabet[new_index]
+            else:
+                final_text += sign
 
         if encode_or_decode == "encode":
             print(f"Here is the encoded result: {final_text}")
