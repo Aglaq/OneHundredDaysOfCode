@@ -2,27 +2,43 @@
 # Day 8 - Project: Caesar Cipher
 
 alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+repetition = True
 
-# direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n").lower()
-text = input("Type your message:\n").lower()
-shift = int(input("Type the shift number:\n"))
+while repetition:
 
-def encrypt(original_text, shift_amount):
-    encrypted_text = ""
+    direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n").lower()
+    text = input("Type your message:\n").lower()
+    shift = int(input("Type the shift number:\n"))
 
-    for letter in original_text:
-        index = alphabet.index(letter)
-        new_index = index + shift_amount
-        new_index %= len(alphabet)
-        # this idea only works to shift < 26
-        # if new_index > 25:
-        #     new_index = new_index - 26
+    def caesar(encode_or_decode, original_text, shift_amount):
+        final_text = ""
 
-        encrypted_text += alphabet[new_index]
-        
-    print(f"Here is the encoded result: {encrypted_text}")
+        if encode_or_decode == "encode":
+            shift_amount = shift_amount
+        elif encode_or_decode == "decode":
+            shift_amount = - shift_amount
 
-encrypt(text, shift)
+        for letter in original_text:
+            index = alphabet.index(letter)
+            new_index = index + shift_amount
+            # this idea only works to shift < 26
+            # if new_index > 25:
+            #     new_index = new_index - 26
+            # below let shift be infinite
+            new_index %= len(alphabet)
+            final_text += alphabet[new_index]
+
+        if encode_or_decode == "encode":
+            print(f"Here is the encoded result: {final_text}")
+        elif encode_or_decode == "decode":
+            print(f"Decrypted message: {final_text}")  
+
+    caesar(direction, text, shift)
+    repeat = input("Type 'yes' if you want to go again. Otherwise, type 'no'.\n").lower()
+
+    if repeat == "no":
+        print("Bye bye!")
+        repetition = False
 
 # Exercises and examples day 8
 # def greet():
