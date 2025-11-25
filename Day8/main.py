@@ -8,15 +8,19 @@ text = input("Type your message:\n").lower()
 shift = int(input("Type the shift number:\n"))
 
 def encrypt(original_text, shift_amount):
-    encrypted = ""
+    encrypted_text = ""
+
     for letter in original_text:
         index = alphabet.index(letter)
         new_index = index + shift_amount
-        if new_index > 25:
-            new_index = new_index - 26
-        encrypted += alphabet[new_index]
-        # print(index)
-    print(encrypted)
+        new_index %= len(alphabet)
+        # this idea only works to shift < 26
+        # if new_index > 25:
+        #     new_index = new_index - 26
+
+        encrypted_text += alphabet[new_index]
+        
+    print(f"Here is the encoded result: {encrypted_text}")
 
 encrypt(text, shift)
 
