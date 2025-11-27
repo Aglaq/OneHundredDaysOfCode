@@ -5,31 +5,32 @@ import logo
 
 repetition = True
 bidders = {}
-highest_bidder = 0
 
 print(logo.logo)
 print("Welcome to the secret auction program.")
+
+def find_highest_bidder(bidding_dictionary):
+    highest_bidder = 0
+
+    for amount in bidders.values():
+        if amount > highest_bidder:
+            highest_bidder = amount 
+    for bidder in bidders:
+        if highest_bidder == bidders[bidder]:
+            print(f"The winner is {bidder} with a bid of ${bidders[bidder]}.\n")
 
 while repetition:
     name = input("What is your name? \n")
     bid = int(input("What is your bid? \n$"))
     # print(type(bid))
-    bidders[name] = bid
-    
+    bidders[name] = bid  
     more_bidders = input("Are there any other bidders? Type 'yes' or 'no'.\n").lower()
     clear = print("\n" * 20)
 
-
     if more_bidders == "no":
         repetition = False
-        for amount in bidders.values():
-            if amount > highest_bidder:
-                highest_bidder = amount 
-            # print(amount)
-        print(highest_bidder)
-        for amount in bidders:
-            if highest_bidder == bidders[amount]:
-                print(f"The winner is {amount} with a bid of ${bidders[amount]}")
+        find_highest_bidder(bidders)
+
 
         
 
