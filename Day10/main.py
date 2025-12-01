@@ -24,18 +24,20 @@ basic_math = {
     "/": divide,
 }
 
-
 while power_on:
     repetition = True
     print(art.logo)
     first_number = float(input("What's the first number?: "))
     while repetition:
-        operator = input("+\n-\n*\n/\nPick an operation: ")
-        second_number = float(input("What's the next number?: "))
 
+        for symbol in basic_math:
+            print(symbol)
+
+        operator = input("Pick an operation: ")
+        second_number = float(input("What's the next number?: "))
         result = basic_math[operator](first_number, second_number)
         print(f"{first_number} {operator} {second_number} = {result}")
-        continuation = input(f"Type 'y' to continue calculating with {result}, type 'n' to start a new calculation or type any other letter to leave.\n")
+        continuation = input(f"Type 'y' to continue calculating with {result}, type 'n' to start a new calculation or type any other letter to leave.\n").lower
 
         if continuation == 'y':
             first_number = result

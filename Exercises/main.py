@@ -119,3 +119,4 @@
 
 # Exercise 11: Get each digit from a number in the reverse order.
 
+str_number = input("What is your number?: ")
