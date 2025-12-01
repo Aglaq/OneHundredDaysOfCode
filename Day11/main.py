@@ -17,18 +17,12 @@ def black_jack():
     for i in range(2):
         rdm_card = 0
         random_card()
-        print(rdm_card)
         cpu_cards.append(rdm_card)
         random_card()
         player_cards.append(rdm_card)
     print(cpu_cards)
     print(player_cards)
 
-rdm_card = 0
-random_card()
-print(rdm_card)
-cpu_cards.append(rdm_card)
-print(cpu_cards)
 game = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ").lower()
 if game == "y":
     black_jack()
