@@ -7,16 +7,15 @@ cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 empty_cpu_cards = []
 empty_player_cards = []
 
-
 def random_card():
     return random.choice(cards)
 
 def results(player_cards, cpu_cards):
     print(f"Your final hand: {player_cards}, final score: {sum(player_cards)}")
     print(f"Computer's final hand: {cpu_cards}, final score: {sum(cpu_cards)}")
-    if sum(cpu_cards) == 21:
+    if sum(cpu_cards) == 21 and len(cpu_cards) == 2:
         print("Computer has Blackjack, you lose.")
-    elif sum(player_cards) == 21:
+    elif sum(player_cards) == 21 and len(player_cards) == 2:
         print("Blackjack, you win!")
     elif sum(player_cards) > 21:
         print("You went over. You lose")
