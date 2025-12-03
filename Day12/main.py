@@ -1,30 +1,36 @@
 # Day 12 - Scope
 # Day 12 - Project: Number Guessing Game
 import random
+import art
 
 difficulty = "0"
-
-def compare(user_num, comp_num):
-    '''Compares number to guess with user input and prints result'''
-    if user_num < comp_num:
-        print("Too low.")
-    elif user_num > comp_num:
-        print("Too high.")
-    else:
-        print("Correct")
 
 def game(lives):
 
     number_to_guess = random.randint(1, 100)
-    print(number_to_guess)
+    # print(number_to_guess)
+
     while lives > 0:
         print(f"You have {lives} attempts remaining to guess the number.")
         user_guess = int(input("Make a guess: "))
-        compare(user_guess, number_to_guess)
-        lives -= 1
-    else:
-        print("You've run out of guesses. GAME OVER")
 
+        if user_guess < number_to_guess:
+            print("Too low.")
+            print("Guess again")
+            lives -= 1
+        elif user_guess > number_to_guess:
+            print("Too high.")
+            print("Guess again")
+            lives -= 1
+        else:
+            print(f"You got it! The answer was {number_to_guess}.")
+            return
+
+    print("You've run out of guesses. GAME OVER")
+
+print(art.logo)
+print("Welcome to the Number Guessing Game!")
+print("I'm thinking of a number between 1 and 100.")
 while difficulty not in ("easy", "hard"):
     difficulty = input("Choose a difficulty. Type 'easy' or 'hard': ")
 if difficulty == "easy":
