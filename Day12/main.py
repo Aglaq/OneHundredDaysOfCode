@@ -4,6 +4,8 @@ import random
 import art
 
 difficulty = "0"
+EASY_LEVEL_LIVES = 10
+HARD_LEVEL_LIVES = 5
 
 def game(lives):
 
@@ -34,9 +36,9 @@ print("I'm thinking of a number between 1 and 100.")
 while difficulty not in ("easy", "hard"):
     difficulty = input("Choose a difficulty. Type 'easy' or 'hard': ")
 if difficulty == "easy":
-    game(10)
+    game(EASY_LEVEL_LIVES)
 elif difficulty == "hard":
-    game(5)
+    game(HARD_LEVEL_LIVES)
 
 
 
