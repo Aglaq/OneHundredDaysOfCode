@@ -6,28 +6,26 @@ from coffee_maker import CoffeeMaker
 from money_machine import MoneyMachine
 
 
-maker = CoffeeMaker()
-machine = MoneyMachine()
+coffee_maker = CoffeeMaker()
+money_machine = MoneyMachine()
 drink = Menu()
 
 machine_on = True
 while machine_on:
-    program = input("What would you like? (espresso/latte/cappuccino): ")
+    options = drink.get_items()
+    program = input(f"What would you like? ({options}): ")
     while program not in ("espresso", "latte", "cappuccino", "report", "off"):
-        program = input("What would you like? (espresso/latte/cappuccino): ")
+        program = input(f"What would you like? ({options}): ")
     if program == "off":
         print("Bye bye!")
         machine_on = False
     elif program == "report":
-        maker.report()
-        machine.report()
+        coffee_maker.report()
+        money_machine.report()
     else:
         order = drink.find_drink(program)
-        sufficient_resources = maker.is_resource_sufficient(order)
-        if sufficient_resources:
-            sufficient_coins = machine.make_payment(order.cost)
-            if sufficient_coins:
-                maker.make_coffee(order)
+        if coffee_maker.is_resource_sufficient(order) and money_machine.make_payment(order.cost):
+            coffee_maker.make_coffee(order)
 
 
 
