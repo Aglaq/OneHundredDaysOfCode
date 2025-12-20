@@ -1,4 +1,5 @@
 from turtle import Turtle
+STARTING_POSITION = [(0, 0), (-20, 0), (-40, 0)]
 MOVE_DISTANCE = 20
 UP = 90
 DOWN = 270
@@ -12,12 +13,19 @@ class Snake:
         self.head = self.segments[0]
 
     def setup(self):
-        for i in range(3):
-            new_snake_part = Turtle("square")
-            new_snake_part.up()
-            new_snake_part.color("white")
-            new_snake_part.goto((0 + (-20) * i), 0)
-            self.segments.append(new_snake_part)
+        for i in STARTING_POSITION:
+            self.add_segment(i)
+
+    def add_segment(self, position):
+        new_snake_part = Turtle("square")
+        new_snake_part.up()
+        new_snake_part.color("white")
+        new_snake_part.goto(position)
+        self.segments.append(new_snake_part)
+
+    def extend(self):
+        self.add_segment(self.segments[-1].position())
+
 
     def move(self):
         for seg_num in range(len(self.segments) - 1, 0, -1):
