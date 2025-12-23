@@ -33,5 +33,14 @@ while game_is_on:
     if ball.distance(pad_1) < 50 and ball.xcor() < -320 or ball.distance(pad_2) < 50 and ball.xcor() > 320:
         ball.change_direction_pad()
 
+    # Detect when paddle misses.
+    if ball.xcor() < -380:
+        print("Point for right")
+        ball.reset_position()
+        # game_is_on = False
+    if ball.xcor() > 380:
+        print("Point for left")
+        ball.reset_position()
+        # game_is_on = False
 
 screen.exitonclick()

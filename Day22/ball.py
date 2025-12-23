@@ -14,7 +14,11 @@ class Ball(Turtle):
         self.goto(STARTING_POSITION)
         self.setheading(move_angle)
         self.move_angle = move_angle
-        
+    
+    def random_angle(self):
+        self.move_angle = randint(0, 360)
+        self.setheading(self.move_angle)
+
     def move(self):
         self.forward(SPEED)
 
@@ -27,3 +31,8 @@ class Ball(Turtle):
         new_angle = 180 - self.move_angle
         self.setheading(new_angle)
         self.move_angle = new_angle
+
+    def reset_position(self):
+        self.home()
+        self.random_angle()
+        
