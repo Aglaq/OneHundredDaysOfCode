@@ -12,6 +12,7 @@ screen.setup(width=600, height=600)
 screen.tracer(0)
 
 player = Player()
+scoreboard = Scoreboard()
 
 screen.listen()
 screen.onkey(player.move, "Up")
@@ -23,7 +24,7 @@ while game_is_on:
     screen.update()
     if player.ycor() == player.finish_line:
         player.restart()
-        # scoreboard.level_up()
+        scoreboard.level_up()
         # car_manager.level_up()
 
 
