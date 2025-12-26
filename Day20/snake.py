@@ -7,6 +7,7 @@ LEFT = 180
 RIGHT = 0
 
 class Snake:
+
     def __init__(self):
         self.segments = []
         self.setup()
@@ -22,6 +23,13 @@ class Snake:
         new_snake_part.color("white")
         new_snake_part.goto(position)
         self.segments.append(new_snake_part)
+
+    def reset(self):
+        for seg in self.segments:
+            seg.goto(1000, 1000)
+        self.segments.clear()
+        self.setup()
+        self.head = self.segments[0]
 
     def extend(self):
         self.add_segment(self.segments[-1].position())
