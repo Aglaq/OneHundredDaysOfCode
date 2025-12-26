@@ -25,14 +25,17 @@ while game_is_on:
     screen.update()
     car_manager.maybe_create_car()
     car_manager.move()
+
+    # Detect end of level
     if player.ycor() >= player.finish_line:
         player.restart()
         scoreboard.level_up()
         car_manager.level_up()
+
+    # Detect collision with cars
     for car in car_manager.cars:
         if player.distance(car) < 20:
             scoreboard.game_over()
             game_is_on = False
-
 
 screen.exitonclick()

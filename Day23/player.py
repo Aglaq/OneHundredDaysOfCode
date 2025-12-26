@@ -6,9 +6,11 @@ FINISH_LINE_Y = 280
 DIRECTION = 90
 
 class Player(Turtle):
+    
     def __init__(self):
         super().__init__()
         self.shape("turtle")
+        self.up()
         self.finish_line = FINISH_LINE_Y
         self.restart()
 
@@ -16,7 +18,6 @@ class Player(Turtle):
         self.forward(MOVE_DISTANCE)
 
     def restart(self):
-        self.up()
         self.goto(STARTING_POSITION)
         self.setheading(DIRECTION)
         
