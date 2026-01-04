@@ -1,15 +1,45 @@
 # Day 25 - Working with CSV Data and the Pandas Library
 # Day 25 - Project: Name the States
 import turtle
+import pandas
+from write import Write
 
+game_is_on = True
 screen = turtle.Screen()
 screen.title("States Game")
 image = "blank_states_img.gif"
 screen.addshape(image)
-
 turtle.shape(image)
+states_data = pandas.read_csv("50_states.csv")
+states = states_data.state
+guessed_states = []
+points = 0
+write = Write()
 
-screen.exitonclick()
+while game_is_on:
+    answer_state = (screen.textinput(title=f"{points}/50 States Correct", prompt="What's another state's name?")).title()
+
+    if answer_state == "Exit":
+        break
+
+    for s in states:
+        if answer_state == s:
+            position = states_data[states_data.state == answer_state]
+            position_x = position.x.item()
+            position_y = position.y.item()
+            write.update_screen(answer_state, position_x, position_y)
+            guessed_states.append(answer_state)
+            points += 1
+        if points == 50:
+            game_is_on = False
+
+missing_states_list = []
+for s in states:
+    if s not in guessed_states:
+        missing_states_list.append(s)
+
+missing_states = pandas.DataFrame(missing_states_list)
+missing_states.to_csv("states_to_learn.csv")
 
 # Examples and exercises Day 25
 # import pandas
