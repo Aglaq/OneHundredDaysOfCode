@@ -33,10 +33,10 @@ while game_is_on:
         if points == 50:
             game_is_on = False
 
-missing_states_list = []
-for s in states:
-    if s not in guessed_states:
-        missing_states_list.append(s)
+missing_states_list = [s for s in states if s not in guessed_states]
+# for s in states:
+#     if s not in guessed_states:
+#         missing_states_list.append(s)
 
 missing_states = pandas.DataFrame(missing_states_list)
 missing_states.to_csv("states_to_learn.csv")
