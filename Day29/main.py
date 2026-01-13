@@ -4,6 +4,7 @@ from tkinter import *
 from tkinter import messagebox
 from random import choice, randint, shuffle
 import pyperclip
+import json
 
 # ---------------------------- CONSTANTS ------------------------------- #
 
@@ -35,15 +36,25 @@ def save():
     website = input_website.get()
     email = input_email.get()
     password = input_password.get()
+    new_data = {
+        website: {
+            "email": email,
+            "password": password,
+            }  
+        }
 
     if len(website) == 0 or len(email) == 0 or len(password) == 0:
         messagebox.showerror(title="OOPS!", message="Please don't leave any fields empty!")
     else:
-        is_ok = messagebox.askokcancel(title=website, message=f"These are the details entered: \nEmail: {email} "
-                            f"\nPassword: {password} \nIs it ok to save?")
-        if is_ok:
-            with open("data.txt", "a") as d:
-                d.write(f"{website} | {email} | {password}\n")
+        with open("data.json", "r") as data_file:
+            # Reading old data
+            data = json.load(data_file)
+            # Updating old data with new one
+            data.update(new_data)
+
+        with open("data.json", "w") as data_file:
+            # Saving updated data
+            json.dump(data, data_file, indent=4)
             input_website.delete(0, END)
             input_password.delete(0, END)
 
