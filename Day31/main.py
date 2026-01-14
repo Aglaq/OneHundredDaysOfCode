@@ -32,18 +32,22 @@ def flipping_card(key):
 
 def choosing_random_card():
     '''Chooses random card and flips card to front side.'''
+    global flip_timer
+    window.after_cancel(flip_timer)
     random_card = random.choice(words_list)
     random_word = (list(random_card.keys())[0])
     canvas.itemconfig(card_img, image=card_front_img)
     canvas.itemconfig(language_text, text=LANG_1, fill="black")
     canvas.itemconfig(word_text, text=random_word, fill="black")
-    window.after(3000, flipping_card, random_word)
+    flip_timer = window.after(3000, flipping_card, random_word)
 
 #-------------------------------GUI-----------------------------------
 
 window = Tk()
 window.title("Flash Cards")
 window.config(padx=50, pady=50, bg=BACKGROUND_COLOR)
+
+flip_timer = window.after(3000, flipping_card, "")
 
 # Canvas
 canvas = Canvas(width=800, height=526, bg=BACKGROUND_COLOR, highlightthickness=0)
