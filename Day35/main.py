@@ -1,12 +1,16 @@
 # Day 35 - API Keys, Authentication, Environment Variables, and Sending SMS
 # Day 35 - Rain Alert Application
 import requests
+from twilio.rest import Client
 
 OWM_Endpoint = "https://api.openweathermap.org/data/2.5/foreast"
+account_sid = "..."
+auth_token = "..."
+
 parameters = {
     "lat": 42.497681,
     "lon": 27.470030,
-    "appid": "636fdcf3988faba51b5bf1d6af12f5c6",
+    "appid": "...",
     "cnt": 4,
 }
 
@@ -20,4 +24,11 @@ for hour_data in weather_data["list"]:
     if int(condition_code) < 700:
         will_rain = True
 if will_rain:
-    print("Bring an umbrella.")
+    client = Client(account_sid, auth_token)
+    message = client.messages \
+        .create(
+            body="It's going to rain today! Remember to take an umbrella."
+            from="..."
+            to="..."
+        )
+    print(message.status)
