@@ -3,6 +3,7 @@
 from datetime import date, timedelta
 import os
 import requests
+# from twilio.rest import Client
 
 STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
@@ -11,6 +12,8 @@ alphavantage_api = os.environ.get("ALPHA_API")
 news_api = os.environ.get("NEWS_API")
 yesterday = (date.today() - timedelta(days=1)).isoformat()
 news_endpoint = "https://newsapi.org/v2/everything"
+account_sid = "..."
+auth_token = "..."
 
 alpha_params = {
     "function": "TIME_SERIES_DAILY",
@@ -35,8 +38,6 @@ news_params = {
 #     yesterday_stock, before_yesterday_stock = values[0]["4. close"], values[1]["4. close"]
 
 # if float(before_yesterday_stock) <= 0.95 * float(yesterday_stock) or float(before_yesterday_stock) >= 1.05 * float(yesterday_stock):
-#     print("Get News!")
-
 response_news = requests.get(url=news_endpoint, params=news_params)
 response_news.raise_for_status()
 news_data = response_news.json()
@@ -45,21 +46,24 @@ articles = []
 
 for i in range(3):
     article = {
-        "Headline:": news_data["articles"][i]["title"],
-        "Brief": news_data["articles"][i]["description"]
+        "headline": news_data["articles"][i]["title"],
+        "brief": news_data["articles"][i]["description"]
     }
     articles.append(article)
 
-print(articles[3])
+final_message = f"{STOCK}: \n"
+for article in articles:
+    final_message += f"Headline: {article['headline']}\n"
+    final_message += f"Brief: {article['brief']}\n"
 
-## STEP 1: Use https://www.alphavantage.co
-# When STOCK price increase/decreases by 5% between yesterday and the day before yesterday then print("Get News").
-
-## STEP 2: Use https://newsapi.org
-# Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME. 
-
-## STEP 3: Use https://www.twilio.com
-# Send a seperate message with the percentage change and each article's title and description to your phone number. 
+# client = Client(account_sid, auth_token)
+# message = client.message \
+#     .create(
+#         body=final_message
+#         from="..."
+#         to="..."
+#     )
+# print(message.status)
 
 
 #Optional: Format the SMS message like this: 
