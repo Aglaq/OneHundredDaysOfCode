@@ -3,7 +3,7 @@
 from datetime import date, timedelta
 import os
 import requests
-# from twilio.rest import Client
+from twilio.rest import Client
 
 STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
@@ -37,9 +37,16 @@ values = list(stock_data.values())
 if len(values) >= 2:
     yesterday_stock, before_yesterday_stock = values[0]["4. close"], values[1]["4. close"]
 
-percent_difference = round((float(yesterday_stock) - float(before_yesterday_stock))/float(yesterday_stock) * 100)
+percent_difference = (float(yesterday_stock) - float(before_yesterday_stock))/float(yesterday_stock) * 100
 
-if percent_difference <= -5 or percent_difference >= 5:
+up_down = None
+
+if percent_difference > 0:
+    up_down = "🔺"
+else:
+    up_down = "🔻"
+
+if abs(percent_difference) >= 5:
     response_news = requests.get(url=news_endpoint, params=news_params)
     response_news.raise_for_status()
     news_data = response_news.json()
@@ -53,14 +60,13 @@ if percent_difference <= -5 or percent_difference >= 5:
         }
         articles.append(article)
 
-    final_message = f"{STOCK}: {percent_difference}%\n"
+    final_message = f"{STOCK}: {up_down}{round(abs(percent_difference))}%\n"
     for article in articles:
         final_message += f"Headline: {article['headline']}\n"
         final_message += f"Brief: {article['brief']}\n"
 
     client = Client(account_sid, auth_token)
-    message = client.message \
-        .create(
+    message = client.message.create(
             body=final_message
             from="..."
             to="..."
