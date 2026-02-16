@@ -1,5 +1,6 @@
 # Day 36 - Stock Trading News Monitoring
 # Day 36 - Project: Stock Trading News Monitoring
+from datetime import date, timedelta
 import os
 import requests
 
@@ -7,6 +8,9 @@ STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
 alpha_endpoint = "https://www.alphavantage.co/query"
 alphavantage_api = os.environ.get("ALPHA_API")
+news_api = os.environ.get("NEWS_API")
+yesterday = (date.today() - timedelta(days=1)).isoformat()
+news_endpoint = "https://newsapi.org/v2/everything"
 
 alpha_params = {
     "function": "TIME_SERIES_DAILY",
@@ -14,17 +18,39 @@ alpha_params = {
     "apikey": alphavantage_api,
 }
 
-response = requests.get(url=alpha_endpoint, params=alpha_params)
-response.raise_for_status()
-stock_data = response.json()["Time Series (Daily)"]
+news_params = {
+    "q": COMPANY_NAME,
+    "from": yesterday,
+    "sortBy": "popularity",
+    "apiKey": news_api, 
+}
 
-values = list(stock_data.values())
+# response_stock = requests.get(url=alpha_endpoint, params=alpha_params)
+# response_stock.raise_for_status()
+# stock_data = response_stock.json()["Time Series (Daily)"]
 
-if len(values) >= 2:
-    yesterday_stock, before_yesterday_stock = values[1]["4. close"], values[2]["4. close"]
+# values = list(stock_data.values())
 
-if float(before_yesterday_stock) <= 0.99 * float(yesterday_stock) or float(before_yesterday_stock) >= 1.01 * float(yesterday_stock):
-    print("Get News!")
+# if len(values) >= 2:
+#     yesterday_stock, before_yesterday_stock = values[0]["4. close"], values[1]["4. close"]
+
+# if float(before_yesterday_stock) <= 0.95 * float(yesterday_stock) or float(before_yesterday_stock) >= 1.05 * float(yesterday_stock):
+#     print("Get News!")
+
+response_news = requests.get(url=news_endpoint, params=news_params)
+response_news.raise_for_status()
+news_data = response_news.json()
+
+articles = []
+
+for i in range(3):
+    article = {
+        "Headline:": news_data["articles"][i]["title"],
+        "Brief": news_data["articles"][i]["description"]
+    }
+    articles.append(article)
+
+print(articles[3])
 
 ## STEP 1: Use https://www.alphavantage.co
 # When STOCK price increase/decreases by 5% between yesterday and the day before yesterday then print("Get News").
