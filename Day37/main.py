@@ -3,8 +3,8 @@
 import requests
 from datetime import datetime
 
-USERNAME = "aglaque"
-TOKEN = "xkfivy368snchfr2"
+USERNAME = "..."
+TOKEN = "..."
 pixela_endpoint = "https://pixe.la/v1/users"
 user_params = {
     "token": TOKEN,
@@ -47,5 +47,6 @@ posting_data = {
     "quantity": today_distance,
 }
 
-response = requests.post(url=posting_endpoint, json=posting_data, headers=headers)
-print(response.text)
+# response = requests.post(url=posting_endpoint, json=posting_data, headers=headers)
+# print(response.text)
+
