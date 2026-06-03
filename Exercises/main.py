@@ -117,6 +117,37 @@
 
 # print(result_list)
 
-# Exercise 11: Get each digit from a number in the reverse order.
+# ---------------------------------PYNative-------------------------------------
 
-str_number = input("What is your number?: ")
+# Exercise 1: Print first 10 natural numbers using while loop
+
+# a = 1
+# while a < 11:
+#     print(a)
+#     a += 1
+
+# Exercise 2: Print the following pattern
+# 1 
+# 1 2 
+# 1 2 3 
+# 1 2 3 4 
+# 1 2 3 4 5
+
+# for i in range(1, 6):
+#     for j in range(1, i + 1):
+#         print(j, end=" ")
+#     print("")
+
+# Exercise 3: Calculate sum of all numbers from 1 to a given number
+
+# user_input = int(input("Enter number: "))
+# sum = 0
+
+# for i in range(1, user_input + 1):
+#     sum += i
+
+# print(sum)
+
+# Exercise 4: Print multiplication table from 1 to 10 of a given number
+
+# user_input = int(input("Enter number: "))
